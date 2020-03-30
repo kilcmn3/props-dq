@@ -6,7 +6,10 @@
 In this repository is an `index.html` file with some pre-written HTML. Open this file in your browser and discuss the following:
 
 1. Looking at the page in the browser, discuss which parts of the page look repeatable. Now looking at the HTML, discuss which bits of the HTML are repeatable.
+ A) Inside the <div class="card-container"> look very DRY.
+
 2. If you were to abstract out the repeatable sections, which bits would remain static and which would need to be dynamic? In other words, which parts of the HTML are always the same (static) and which parts are unique to each section (dynamic)?
+  A) Leave <div id="root"> should alway be static, and rest can be dynamic.
 
 ex:
 ```HTML
@@ -20,6 +23,12 @@ ex:
 ```
 
 3. Eventually real data will be used in this application. Considering that you have many repeating sections of your page and that each section has various **properties** which need to be filled in, how might your data be structured?
+ A) let card = {
+   id: card_id,
+   src: url,
+   name: name,
+   age: age
+ }
 
 ex: 
 ```HTML
@@ -45,8 +54,26 @@ let greetings = [
 There is another file in this repository called `index-react.html` with some pre-written HTML and JSX that, in the browser, looks identical. Discuss the following:
 
 4. What is different about the pure HTML written in `index.html` and the mix of HTML and JSX written in `index-react.html`? What is the same?
+A)Between two files ,the both share the html language where you can write all the html  tags, but  difference is that 'index.-react.html' 'react' is explicitly using inside the html file. As an example, because of the <script type="text/bable">, is compiling React language that allow  to write insid the html file.
 
 5. Try writing your own component using JSX to create the abstracted HTML you created in step 2.
+  const Card(props){
+    return(
+      <div className="card-container">
+      <div className="card" id={props.id}>
+      <img src={props.url} alt="Jasper">
+      <h2>Name: {props.name}</h2>
+      <h4>Age: {props.age}</h4>
+      </div>
+    )
+  }
+
+  ReactDOM.render(
+    <div>
+      <Card id="1" src="some url" name="John" age="1" />
+    </div>,
+    documnet.getElemetById('root')
+  )
 
 ex: 
 ```jsx
@@ -65,6 +92,37 @@ ReactDOM.render(
 ```
 
 6. Using the array you created in step 3, try to operate on that array to programmatically create your JSX
+
+let datas = [{
+   id: 1,
+   src: "some url",
+   name: "A",
+   age: 1
+ },
+{
+   id: 2,
+   src: "some url",
+   name: "B",
+   age: 2
+ }]
+
+ const Card = (props) =>{
+    return(
+      <div className="card-container">
+      <div className="card" id={props.id}>
+      <img src={props.url} alt="Jasper">
+      <h2>Name: {props.name}</h2>
+      <h4>Age: {props.age}</h4>
+      </div>
+    )
+ }
+
+ReactDOM.render(
+  <div>
+    {datas.map(data => <Card key={data.id} src={data.src} name={data.name} age={data.age}/>)}
+  </div>, document.getElementById('root')
+)
+
 
 ex: 
 ```jsx

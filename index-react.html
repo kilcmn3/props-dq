@@ -13,6 +13,22 @@
     <script type="text/babel">
 
       // Write your component here!!
+      let data = {
+        id:5,
+        src:"https://images.unsplash.com/photo-1496196614460-48988a57fccf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80",
+        name:"Ninja",
+        age:5
+      }
+      const Card = (props)=>{
+        return(
+          <div className="card" id={props.passData.id}>
+            <img src={props.passData.src} alt="Jasper" />
+            <h2>Name: {props.passData.name}</h2>
+            <h4>Age: {props.passData.age}</h4>
+          </div>
+
+        )
+      }
 
       ReactDOM.render(
         <div className="card-container">
@@ -36,7 +52,8 @@
             <h2>Name: The Dude</h2>
             <h4>Age: 24</h4>
           </div>
-        </div>, 
+          <Card passData={data}/>
+        </div>,
         document.getElementById('root')
       )
 
